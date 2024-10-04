@@ -13,16 +13,34 @@ namespace bstChecker
 
         static void Main(string[] args)
         {
-            
+            tree myTree = new tree();
+            myTree.root = new Node("treeRoot");
+
+            myTree.root.LeftChild = new Node("treeRootLeft");
+            //myTree.root.LeftChild.LeftChild = new Node("treeRootLeftLeft");
+
+
+            myTree.root.RightChild = new Node("treeRootRight");
+            myTree.root.RightChild.RightChild = new Node("treeRootRightRight");
+            myTree.root.RightChild.RightChild.RightChild = new Node("treeRootRightRightRight");
+            myTree.root.RightChild.RightChild.RightChild.RightChild = new Node("treeRootRightRightRightRight");
+
+
+            myTree.CheckingDepths(myTree.root, 0);
+            Console.WriteLine(ChekcIfBalanced(depths));
+
         }
 
-        public bool ChekcIfBalanced(List<int> depths)
+        public static bool ChekcIfBalanced(List<int> depths)
         {
             int max = depths.Max();
             int min = depths.Min();
 
-            if (max - min < 1) { return true; }
-            return false;
+            if (max - min > 1)
+            {
+                return false;
+            }
+            else { return true; }
         }
 
         public class tree
@@ -35,7 +53,7 @@ namespace bstChecker
             {
                 if (currentNode == null)
                 {
-                    depths.Add(currentDepth);   
+                    depths.Add(currentDepth-1);   
                     return;
                 }
 
